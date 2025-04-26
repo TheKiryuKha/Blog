@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Comment;
+use App\Models\Post;
 use App\Models\User;
 
 test('to array', function(){
@@ -10,13 +11,14 @@ test('to array', function(){
     expect(array_keys($comment->toArray()))->toBe([
         'id',
         'user_id',
+        'post_id',
         'content',
         'created_at',
         'updated_at'
     ]);
 });
 
-test('Belongs to user', function(){
+it('Belongs to user', function(){
 
     $user = User::factory()->create([
         'name' => 'Igor'
@@ -27,5 +29,19 @@ test('Belongs to user', function(){
     ]);
 
     expect($comment->user->name)->toBe('Igor');
+
+});
+
+it('Belongs to post', function(){
+
+    $post = Post::factory()->create([
+        'title' => 'Post'
+    ]);
+
+    $comment = Comment::factory()->create([
+        'post_id' => $post->id
+    ]);
+
+    expect($comment->post->title)->toBe('Post');
 
 });

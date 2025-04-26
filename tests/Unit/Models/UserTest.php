@@ -22,7 +22,8 @@ test('to array', function(){
 test('Has comments', function(){
 
     $user = User::factory()->create()->fresh();
-    $user->comments()->create([
+    $comment = Comment::factory()->create([
+        'user_id' => $user->id,
         'content' => 'Nice Post!'
     ]);
 
