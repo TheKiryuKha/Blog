@@ -5,7 +5,7 @@ namespace App\Services;
 use File;
 use Http;
 
-class DownloadManager{
+class FileManager{
 
     public function save(string $url, string $filename): void
     {  
