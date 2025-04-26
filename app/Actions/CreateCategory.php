@@ -7,13 +7,10 @@ use DB;
 
 final class CreateCategory{
 
-    public function handle(array $attr)
+    public function handle(array $attr): Category
     {
-
-        $category = DB::transaction(function() use($attr){
+        return DB::transaction(function() use($attr){
             return Category::create($attr);
         });
-
-        return $category;
     }
 }
