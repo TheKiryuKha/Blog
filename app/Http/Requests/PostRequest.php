@@ -13,24 +13,10 @@ class PostRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
+        return [
             'title' => ['required', 'string', 'min:3', 'max:100'],
             'image' => ['nullable', 'image'],
             'content' => ['required', 'string', 'min:3', 'max:255']
         ];
-
-        switch($this->getMethod())
-        {
-            case 'POST':
-                return $rules;
-            case 'PATCH':
-                return [
-                    'id' => ['required', 'integer', 'unique:posts,id']
-                ] + $rules;
-            case 'DELETE':
-                return [
-                    'id' => ['required', 'integer', 'unique:posts,id']
-                ];
-        }
     }
 }

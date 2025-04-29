@@ -13,23 +13,8 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules =  [
+        return  [
             'title' => ['required', 'string', 'min:1', 'max:20']
         ];
-
-        switch($this->getMethod())
-        {
-            case 'POST':
-                return $rules;
-            case 'PATCH':
-                return [
-                    'id' => ['required', 'integer', 'unique:categories,id'],
-                ] + $rules;
-            
-            case 'DELETE':
-                return [
-                    'id' => ['required', 'integer', 'unique:categories,id']
-                ];
-        }
     }
 }

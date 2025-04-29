@@ -2,12 +2,11 @@
 
 namespace App\Actions;
 
-use App\DTO\PostDTO;
 use App\Models\Post;
+use App\Services\ImageManager;
 use DB;
 
 final class EditPost{
-
     public function handle(Post $post, array $attr): bool
     {
         DB::transaction(function() use ($post, $attr){

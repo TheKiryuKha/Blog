@@ -9,8 +9,10 @@ final class EditCategory{
 
     public function handle(Category $category, array $attr): bool
     {
-        return DB::transaction(function() use ($category,$attr){
-            return $category->update($attr);
+        DB::transaction(function() use ($category,$attr){
+            $category->update($attr);
         });
+
+        return true;
     }
 }

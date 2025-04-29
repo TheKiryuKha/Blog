@@ -13,22 +13,8 @@ class CommentRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
+        return  [
             'content' => ['required', 'string', 'min:1', 'max:200']
         ];
-
-        switch($this->getMethod())
-        {
-            case 'POST':
-                return $rules;
-            case 'PATCH':
-                return [
-                    'id' => ['required', 'integer', 'unique:categories,id']
-                ] + $rules;
-            case 'DELETE':
-                return [
-                    'id' => ['required', 'integer', 'unique:categories,id']
-                ];
-        }
     }
 }
