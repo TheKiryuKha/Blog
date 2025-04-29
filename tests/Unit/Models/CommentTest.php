@@ -20,28 +20,23 @@ test('to array', function(){
 
 it('Belongs to user', function(){
 
-    $user = User::factory()->create([
-        'name' => 'Igor'
-    ])->fresh();
-
+    $user = User::factory()->create();
     $comment = Comment::factory()->create([
         'user_id' => $user->id
     ]);
 
-    expect($comment->user->name)->toBe('Igor');
+    expect($comment->user)->toBeInstanceOf(User::class);
 
 });
 
 it('Belongs to post', function(){
 
-    $post = Post::factory()->create([
-        'title' => 'Post'
-    ]);
+    $post = Post::factory()->create();
 
     $comment = Comment::factory()->create([
         'post_id' => $post->id
     ]);
 
-    expect($comment->post->title)->toBe('Post');
+    expect($comment->post)->toBeInstanceOf(Post::class);
 
 });

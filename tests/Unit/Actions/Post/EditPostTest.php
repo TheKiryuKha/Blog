@@ -2,8 +2,6 @@
 
 use App\Models\Post;
 use App\Actions\EditPost;
-use App\DTO\PostDTO;
-
 
 it('edits post', function(){
     $post = Post::factory()->create();

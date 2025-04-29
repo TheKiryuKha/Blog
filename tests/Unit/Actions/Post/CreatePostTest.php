@@ -1,20 +1,18 @@
 <?php
 
-use App\DTO\PostDTO;
 use App\Models\User;
 use App\Actions\CreatePost;
 
 it('creates post', function(){
     
-    $user = User::factory()->create()->fresh();
+    $user = User::factory()->create();
     $action = app(CreatePost::class);
 
-    $post = $action->handle(new PostDTO(
-        'Post',
-        'Nice Post!',
-        $user
-    ));
+    $post = $action->handle($user, [
+        'title' => 'Test',
+        'content' => 'Nice Post!'
+    ]);
 
-    expect($post->title)->toBe('Post')
+    expect($post->title)->toBe('Test')
         ->and($post->content)->toBe('Nice Post!');
 });

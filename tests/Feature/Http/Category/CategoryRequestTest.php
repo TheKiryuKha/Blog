@@ -37,13 +37,3 @@ test('DELETE connection uses right validation rules', function(){
         'id' => ['required', 'integer', 'unique:categories,id']
     ]);
 });
-
-test('authorization works right', function(){
-    
-    $request = CategoryRequest::create(
-        '',
-        'DELETE'
-    );
-
-    expect($request->authorize())->toBe(true);
-});

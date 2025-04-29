@@ -22,13 +22,10 @@ test('to array', function(){
 test('Has comments', function(){
 
     $user = User::factory()->create()->fresh();
-    $comment = Comment::factory()->create([
-        'user_id' => $user->id,
-        'content' => 'Nice Post!'
+    Comment::factory()->count(3)->create([
+        'user_id' => $user->id
     ]);
 
-    $user_comments = $user->comments()->get();
-
-    expect($user_comments[0]->content)->toBe('Nice Post!');
+    expect($user->comments)->toHaveCount(3);
 
 });

@@ -8,8 +8,8 @@ it('edits category', function(){
     $action = app(EditCategory::class);
 
     $action->handle($category, [
-        'title' => 'newTitle'
+        'title' => 'Test'
     ]);
 
-    expect($category->title)->toBe('newTitle');
+    expect($category->title)->toBe('Test');
 });

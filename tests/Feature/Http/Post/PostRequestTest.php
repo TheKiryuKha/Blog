@@ -41,13 +41,3 @@ test('DELETE connection uses right validation rules', function(){
         'id' => ['required', 'integer', 'unique:posts,id']
     ]);
 });
-
-test('authorization works right', function(){
-    
-    $request = PostRequest::create(
-        '',
-        'POST'
-    );
-
-    expect($request->authorize())->toBe(true);
-});

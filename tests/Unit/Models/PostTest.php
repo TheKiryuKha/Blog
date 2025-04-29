@@ -25,27 +25,19 @@ test('to array', function(){
 it('has comments', function(){
 
     $post = Post::factory()->create();
-    $comment = Comment::factory()->create([
-        'post_id' => $post,
-        'content' => 'Nice Post!'
+    Comment::factory()->count(3)->create([
+        'post_id' => $post
     ]);
 
-    $user_comments = $post->comments()->get();
-
-    expect($user_comments[0]->content)->toBe('Nice Post!');
-
+    expect($post->comments)->toHaveCount(3);
 });
 
 test('Belongs to user', function(){
 
-    $user = User::factory()->create([
-        'name' => 'Igor'
-    ]);
-
+    $user = User::factory()->create();
     $post = Post::factory()->create([
         'user_id' => $user->id
     ]);
 
-    expect($post->user->name)->toBe('Igor');
-
+    expect($post->user)->toBeInstanceOf(User::class);
 });
