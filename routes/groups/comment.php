@@ -21,6 +21,6 @@ Route::controller(CommentController::class)->group(function () {
         ->name('comments.update');
 
     Route::delete('/comments/{comment}',  'destroy')
-        ->can('destroy', 'comment')
+        ->can('delete', 'comment')
         ->name('comments.destroy');
 });

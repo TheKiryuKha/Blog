@@ -14,7 +14,7 @@ class CommentPolicy
         return $user->id === $comment->user_id;
     }
 
-    public function destroy(User $user, Comment $comment): bool
+    public function delete(User $user, Comment $comment): bool
     {
         if($user->id == $comment->user_id){
             return true;
