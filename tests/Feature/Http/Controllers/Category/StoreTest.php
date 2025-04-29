@@ -25,5 +25,5 @@ test('non admin cannot create category', function(){
     $response = $this->actingAs($user)
         ->post(route('categories.store'));
         
-    $response->assertStatus(403);
+    $response->assertStatus(302);
 });

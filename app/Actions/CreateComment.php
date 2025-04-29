@@ -9,17 +9,10 @@ use DB;
 
 final class CreateComment{
 
-    public function handle(User $user, Post $post, array $attr): Comment
+    public function handle(User $user, array $attr): Comment
     {
-
-        return DB::transaction(function() use($user, $post, $attr){
-            $comment = new Comment();
-
-            $comment->fill($attr);
-            $comment->user_id = $user->id;
-            $comment->post_id = $post->id;
-            $comment->save();
-
+        return DB::transaction(function() use($user, $attr){
+            $comment = $user->comments()->create($attr);
             return $comment;
         });
     }

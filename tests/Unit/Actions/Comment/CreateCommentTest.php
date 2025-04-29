@@ -5,11 +5,12 @@ use App\Models\Post;
 use App\Models\User;
 
 it('creates comment', function(){
-    $user = User::factory()->create()->fresh();
-    $post = Post::factory()->create()->fresh();
+    $user = User::factory()->create();
+    $post = Post::factory()->create();
     $action = app(CreateComment::class);
 
-    $comment = $action->handle($user,$post, [
+    $comment = $action->handle($user,[
+        'post_id' => $post->id,
         'content' => 'Nice Post!'
     ]);
 

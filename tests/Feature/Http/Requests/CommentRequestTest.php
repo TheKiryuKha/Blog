@@ -11,6 +11,7 @@ test("Comment has right validation rules", function(){
     );
     
     expect($request->rules())->toBe([
+        'post_id' => ['nullable', 'integer', 'unique:posts'],
         'content' => ['required', 'string', 'min:1', 'max:200']
     ]);
 });
