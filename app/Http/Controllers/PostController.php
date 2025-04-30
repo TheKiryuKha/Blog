@@ -17,11 +17,13 @@ class PostController
         return response(status:200);
     }
 
-    // public function show()
-    // {
-    //     сюда засунуть логику увеличения просмотров
-    //     сделать действие для лайка
-    // }
+    public function show(Post $post)
+    {   
+        $post->views++;
+        $post->save();
+        
+        return response(200);
+    }
 
     public function create()
     {

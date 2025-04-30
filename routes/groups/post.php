@@ -31,3 +31,7 @@ Route::prefix('admin_panel')->middleware('auth')->controller(PostController::cla
         ->can('delete', 'post')
         ->name('posts.destroy');
 });
+
+Route::get('/posts/{post}', [PostController::class, 'show'])
+    ->middleware('auth')
+    ->name('posts.show');
