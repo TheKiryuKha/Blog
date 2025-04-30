@@ -7,7 +7,6 @@ use App\Actions\DeletePost;
 use App\Actions\EditPost;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
-use Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
@@ -24,13 +23,18 @@ class PostController
     //     сделать действие для лайка
     // }
 
+    public function create()
+    {
+        return response(status:200);
+    }
+
     public function store(PostRequest $request, CreatePost $action): RedirectResponse
     {
         $action->handle($request->user(), $request->validated());
         return redirect()->route('posts.index');
     }
 
-    public function edit(): Response
+    public function edit(Post $post): Response
     {
         return response(status:200);
     }

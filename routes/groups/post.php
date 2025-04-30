@@ -14,6 +14,10 @@ Route::prefix('admin_panel')->middleware('auth')->controller(PostController::cla
         ->can('is_admin')
         ->name('posts.store');
 
+    Route::get('/posts/create', 'create')
+        ->can('is_admin')
+        ->name('posts.create');
+
     Route::get('/posts/{post}/edit', 'edit')
         ->can('workWithPost', 'post')
         ->name('posts.edit');
