@@ -30,4 +30,32 @@ class Post extends Model
             ->where('user_id', $user->id)
             ->exists();
     }
+
+    public function is_liked(User $user): bool
+    {
+        return DB::table('history')
+            ->where('post_id', $this->id)
+            ->where('user_id', $user->id)
+            ->value('is_liked');
+    }
+
+    public function saveLikeInHistory($user): void
+    {
+        DB::table('history')
+                    ->where('post_id', $this->id)
+                    ->where('user_id', $user)
+                    ->update([
+                        'is_liked' => true
+                    ]);
+    }
+
+    public function saveDislikeInHistory($user): void
+    {
+        DB::table('history')
+                    ->where('post_id', $this->id)
+                    ->where('user_id', $user)
+                    ->update([
+                        'is_liked' => false
+                    ]);
+    }
 }

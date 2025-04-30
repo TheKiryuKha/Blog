@@ -37,6 +37,8 @@ return new class extends Migration
 
             $table->foreignIdFor(Post::class)
                 ->constrained();
+
+            $table->boolean('is_liked');
         });
     }
 };

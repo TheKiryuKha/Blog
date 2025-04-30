@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Actions\CreatePost;
 use App\Actions\DeletePost;
 use App\Actions\EditPost;
+use App\Actions\ToggleLikePost;
 use App\Actions\ViewPost;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
@@ -25,6 +27,17 @@ class PostController
         }
 
         return response(200);
+    }
+
+    public function like(Post $post, ToggleLikePost $action): RedirectResponse
+    {
+        $action->handle(
+            request()->user(),
+            $post,
+            $post->is_liked(request()->user())
+        );
+
+        return redirect()->back();
     }
 
     public function create()

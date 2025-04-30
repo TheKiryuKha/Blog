@@ -14,7 +14,7 @@ test('user can see post and post views updates', function(){
     $response->assertStatus(200);
 
     expect(Post::first()->views)->toBe(1);
-})->only();
+});
 
 test('Re-viewing does not affect history', function(){
     $user = User::factory()->create();
@@ -29,4 +29,4 @@ test('Re-viewing does not affect history', function(){
     $response->assertStatus(200);
 
     expect(Post::first()->views)->toBe(1);
-})->only();
+});

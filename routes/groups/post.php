@@ -35,3 +35,7 @@ Route::prefix('admin_panel')->middleware('auth')->controller(PostController::cla
 Route::get('/posts/{post}', [PostController::class, 'show'])
     ->middleware('auth')
     ->name('posts.show');
+
+Route::get('/posts/{post}/like', [PostController::class, 'like'])
+    ->middleware('auth')
+    ->name('posts.like');

@@ -16,7 +16,8 @@ final class ViewPost{
 
             DB::table('history')->insert([
                 'post_id' => $post->id,
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'is_liked' => false
             ]);
         });
         return true;
