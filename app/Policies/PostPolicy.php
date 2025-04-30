@@ -17,6 +17,11 @@ class PostPolicy
     {
         return true;
     }
+
+    public function change_status(User $user, Post $post): bool
+    {
+        return $user->id === $post->user_id AND $user->role === UserRole::Admin;
+    }
     
     public function create(User $user): bool
     {

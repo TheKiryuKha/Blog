@@ -34,8 +34,12 @@ Route::middleware('auth')->controller(PostController::class)->group(function(){
     });
     
     Route::get('/posts/{post}', 'show')
-    ->name('posts.show');
+        ->name('posts.show');
 
     Route::get('/posts/{post}/like', 'like')
-    ->name('posts.like');
+        ->name('posts.like');
+
+    Route::get('/posts/{post}/status', 'status')
+        ->can('change_status', 'post')
+        ->name('posts.status');
 });

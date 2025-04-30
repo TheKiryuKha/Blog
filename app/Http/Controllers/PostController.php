@@ -6,10 +6,10 @@ use App\Actions\CreatePost;
 use App\Actions\DeletePost;
 use App\Actions\EditPost;
 use App\Actions\ToggleLikePost;
+use App\Actions\TogglePostStatus;
 use App\Actions\ViewPost;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
-use DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
@@ -37,6 +37,12 @@ class PostController
             $post->is_liked(request()->user())
         );
 
+        return redirect()->back();
+    }
+
+    public function status(Post $post, TogglePostStatus $action): RedirectResponse
+    {
+        $action->handle($post);
         return redirect()->back();
     }
 
