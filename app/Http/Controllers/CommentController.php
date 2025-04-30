@@ -26,7 +26,7 @@ class CommentController
         return redirect()->back();
     }
 
-    public function edit(): Response  
+    public function edit(Comment $comment): Response  
     {
         return response(status:200);
     }

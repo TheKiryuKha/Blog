@@ -3,7 +3,7 @@
 use App\Models\Comment;
 use App\Models\User;
 
-test('user can delete comment', function(){
+test('user can delete his comment', function(){
     $user = User::factory()->create();
     $comment = Comment::factory()->create([
         'user_id' => $user->id
@@ -27,4 +27,14 @@ test('admin can delete comment', function(){
     $response->assertStatus(302);
 
     expect(Comment::all())->toHaveCount(0);
+});
+
+test('user cannot delete NOT his comment', function(){
+    $user = User::factory()->create();
+    $comment = Comment::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->delete(route('comments.destroy', $comment));
+
+    $response->assertStatus(403);
 });

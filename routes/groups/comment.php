@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(CommentController::class)->middleware('auth')->group(function () {
     Route::get('/admin_panel/comments',  'index')
+        ->can('is_admin')
         ->name('comments.index');
 
     Route::post('/comments', 'store')
