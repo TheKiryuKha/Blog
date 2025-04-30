@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -28,6 +29,14 @@ return new class extends Migration
             $table->unsignedBigInteger('views');
             $table->unsignedBigInteger('likes');
             $table->timestamps();
+        });
+
+        Schema::create('history', function(Blueprint $table){
+            $table->foreignIdFor(User::class)
+                ->constrained();
+
+            $table->foreignIdFor(Post::class)
+                ->constrained();
         });
     }
 };

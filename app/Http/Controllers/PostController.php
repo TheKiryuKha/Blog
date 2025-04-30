@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Actions\CreatePost;
 use App\Actions\DeletePost;
 use App\Actions\EditPost;
+use App\Actions\ViewPost;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use App\Repositories\PostRepository;
+use Auth;
+use DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
@@ -17,11 +21,14 @@ class PostController
         return response(status:200);
     }
 
-    public function show(Post $post)
+    public function show(Post $post, ViewPost $action)
     {   
-        $post->views++;
-        $post->save();
-        
+        $user = auth()->user();
+
+        if(! $post->is_viewed($user)){
+            $action->handle($user, $post);
+        }
+
         return response(200);
     }
 
