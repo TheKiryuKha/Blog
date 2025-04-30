@@ -20,4 +20,4 @@ test('admin creates post', function (){
     expect($posts)->toHaveCount(1)
         ->and($posts[0]->title)->toBe('Test')
         ->and($posts[0]->content)->toBe('Test Post');
-})->only();
+});

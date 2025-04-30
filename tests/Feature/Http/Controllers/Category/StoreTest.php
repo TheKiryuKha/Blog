@@ -22,8 +22,7 @@ test('non admin cannot create category', function(){
 
     $user = User::factory()->create();
 
-    $response = $this->actingAs($user)
-        ->post(route('categories.store'));
-        
-    $response->assertStatus(302);
+    $this->actingAs($user)
+        ->post(route('categories.store'))
+        ->assertStatus(403);
 });

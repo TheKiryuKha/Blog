@@ -19,3 +19,17 @@ test('admin edits category', function(){
     expect(Category::all())->toHaveCount(1)
         ->and(Category::first()->title)->toBe('New Title');
 });
+
+test('Non admin cannot edit category', function(){
+
+    $user = User::factory()->create();
+    $category = Category::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->from(route('categories.index'))
+        ->patch(route('categories.update', $category), [
+            'title' => 'New Title'
+        ]);
+
+    $response->assertStatus(403);
+});

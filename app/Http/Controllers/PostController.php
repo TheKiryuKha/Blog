@@ -7,6 +7,7 @@ use App\Actions\DeletePost;
 use App\Actions\EditPost;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 

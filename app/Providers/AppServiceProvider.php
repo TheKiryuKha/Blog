@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Enums\UserRole;
+use App\Models\Comment;
+use App\Models\Post;
 use App\Models\User;
 use DB;
 use Gate;
@@ -28,6 +30,22 @@ class AppServiceProvider extends ServiceProvider
         $this->configureModels();
         $this->preventDestructiveCommands();
         $this->configureUrls();
+
+        Gate::define('is_admin', function(User $user){
+            return $user->role === UserRole::Admin;
+        });
+
+        Gate::define('workWithComment', function(User $user, Comment $comment){
+            return $user->id === $comment->user_id;
+        });
+
+        Gate::define('delete-comment', function(User $user, Comment $comment){
+            return $user->id === $comment->user_id OR $user->role === UserRole::Admin;
+        });
+
+        Gate::define('workWithPost', function(User $user, Post $post){
+            return $user->id === $post->user_id AND $user->role === UserRole::Admin;
+        });
     }
 
     private function configureModels()
