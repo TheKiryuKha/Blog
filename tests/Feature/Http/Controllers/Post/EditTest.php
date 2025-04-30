@@ -12,7 +12,7 @@ test('Admin can see edit page of his post', function(){
     $this->actingAs($admin)
         ->get(route('posts.edit', $post))
         ->assertStatus(200);
-})->only();
+});
 
 test('Admin cannot see edit page of NOT his post', function(){
     $admin = User::factory()->admin()->create();
@@ -21,7 +21,7 @@ test('Admin cannot see edit page of NOT his post', function(){
     $this->actingAs($admin)
         ->get(route('posts.edit', $post))
         ->assertStatus(403);
-})->only();
+});
 
 test('User cannot see edit post page', function(){
     $user = User::factory()->create();
@@ -30,4 +30,4 @@ test('User cannot see edit post page', function(){
     $this->actingAs($user)
         ->get(route('posts.edit', $post))
         ->assertStatus(403);
-})->only();
+});

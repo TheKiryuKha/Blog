@@ -31,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
         $this->preventDestructiveCommands();
         $this->configureUrls();
 
+        // gates
+
         Gate::define('is_admin', function(User $user){
             return $user->role === UserRole::Admin;
         });

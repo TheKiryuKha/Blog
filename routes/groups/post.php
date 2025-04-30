@@ -1,32 +1,33 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('admin_panel')->middleware('auth')->controller(PostController::class)->group(function(){
     
     Route::get('/posts', 'index')
-        ->can('is_admin')
+        ->can('index', Post::class)
         ->name('posts.index');
 
     Route::post('/posts', 'store')
-        ->can('is_admin')
+        ->can('create', Post::class)
         ->name('posts.store');
 
     Route::get('/posts/create', 'create')
-        ->can('is_admin')
+        ->can('create', Post::class)
         ->name('posts.create');
 
     Route::get('/posts/{post}/edit', 'edit')
-        ->can('workWithPost', 'post')
+        ->can('update', 'post')
         ->name('posts.edit');
 
     Route::patch('/posts/{post}', 'update')
-        ->can('workWithPost', 'post')
+        ->can('update', 'post')
         ->name('posts.update');
 
     Route::delete('/posts/{post}', 'destroy')
-        ->can('workWithPost', 'post')
+        ->can('delete', 'post')
         ->name('posts.destroy');
 });
