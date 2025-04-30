@@ -8,9 +8,6 @@ use App\Actions\EditPost;
 use App\Actions\ViewPost;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
-use App\Repositories\PostRepository;
-use Auth;
-use DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
@@ -23,10 +20,8 @@ class PostController
 
     public function show(Post $post, ViewPost $action)
     {   
-        $user = auth()->user();
-
-        if(! $post->is_viewed($user)){
-            $action->handle($user, $post);
+        if(! $post->is_viewed(request()->user())){
+            $action->handle(request()->user(), $post);
         }
 
         return response(200);
