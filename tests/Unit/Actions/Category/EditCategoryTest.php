@@ -11,5 +11,6 @@ it('edits category', function(){
         'title' => 'Test'
     ]);
 
-    expect($category->title)->toBe('Test');
+    expect($category)
+        ->title->toBe('Test');
 });

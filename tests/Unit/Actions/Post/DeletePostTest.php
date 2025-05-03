@@ -9,5 +9,5 @@ it('deletes post', function(){
 
     $action->handle($post);
 
-    expect(Post::all())->toHaveCount(0);
+    expect(Post::count())->toBe(0);
 });

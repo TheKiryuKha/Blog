@@ -11,6 +11,9 @@ it('creates category', function(){
         'title' => 'Test'
     ]);
 
-    expect(Category::all())->toHaveCount(1)
-        ->and($category->title)->toBe('Test');
+    expect($category)
+        ->toBeInstanceOf(Category::class)
+        ->title->toBe('Test');
+    
+    expect(Category::count())->toBe(1);
 });

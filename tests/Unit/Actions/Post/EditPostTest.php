@@ -11,5 +11,6 @@ it('edits post', function(){
         'title' => 'new title'
     ]);
 
-    expect($post->title)->toBe('new title');
+    expect($post)
+        ->title->toBe('new title');
 });

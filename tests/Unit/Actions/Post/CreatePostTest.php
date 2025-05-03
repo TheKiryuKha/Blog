@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use App\Models\User;
 use App\Actions\CreatePost;
 
@@ -13,6 +14,10 @@ it('creates post', function(){
         'content' => 'Nice Post!'
     ]);
 
-    expect($post->title)->toBe('Test')
-        ->and($post->content)->toBe('Nice Post!');
+    expect($post)
+        ->toBeInstanceOf(Post::class)
+        ->title->toBe('Test')
+        ->content->toBe('Nice Post!');
+    
+    expect(Post::count())->toBe(1);
 });

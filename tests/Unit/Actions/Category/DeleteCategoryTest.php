@@ -9,5 +9,5 @@ it('deletes category', function(){
 
     $action->handle($category);
 
-    expect(Category::all())->toHaveCount(0);
+    expect(Category::count())->toBe(0);
 });

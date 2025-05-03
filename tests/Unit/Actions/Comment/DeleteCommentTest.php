@@ -9,5 +9,5 @@ it('deletes comment', function(){
 
     $action->handle($comment);
 
-    expect(Comment::all())->toHaveCount(0);
+    expect(Comment::count())->toBe(0);
 });

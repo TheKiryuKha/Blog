@@ -1,6 +1,7 @@
 <?php
 
 use App\Actions\CreateComment;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 
@@ -14,7 +15,11 @@ it('creates comment', function(){
         'content' => 'Nice Post!'
     ]);
 
-    expect($comment->content)->toBe('Nice Post!')
-        ->and($comment->user_id)->toBe($user->id)
-        ->and($comment->post_id)->toBe($post->id);
+    expect($comment)
+        ->toBeInstanceOf(Comment::class)
+        ->content->toBe('Nice Post!')
+        ->user_id->toBe($user->id)
+        ->post_id->toBe($post->id);
+    
+    expect(Comment::count())->toBe(1);
 });

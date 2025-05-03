@@ -13,5 +13,6 @@ it('edits comment', function (){
         'content' => 'new Nice Post!'
     ]);
 
-    expect($comment->content)->toBe('new Nice Post!');
+    expect($comment)
+        ->content->toBe('new Nice Post!');
 });
