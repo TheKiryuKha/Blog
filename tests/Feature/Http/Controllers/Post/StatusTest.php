@@ -16,5 +16,5 @@ test('Admin change post status to Featured', function(){
 
     $response->assertStatus(302);
 
-    expect(Post::first()->status)->toBe(PostStatus::Featured->value);
+    expect(Post::first()->status)->toBe(PostStatus::Featured);
 });

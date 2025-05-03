@@ -17,6 +17,6 @@ test('user creates comment', function(){
     
     $response->assertStatus(302);
 
-    expect(Comment::all())->toHaveCount(1)
+    expect(Comment::count())->toBe(1)
         ->and(Comment::first()->content)->toBe('Nice Post!');
 });

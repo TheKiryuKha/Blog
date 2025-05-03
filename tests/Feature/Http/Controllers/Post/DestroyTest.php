@@ -5,9 +5,7 @@ use App\Models\User;
 
 test('Admin can delete his post', function(){
     $admin = User::factory()->admin()->create();
-    $post = Post::factory()->create([
-        'user_id' => $admin->id
-    ]);
+    $post = Post::factory()->create(['user_id' => $admin->id]);
 
     $response = $this->actingAs($admin)
         ->from(route('posts.index'))
@@ -15,7 +13,7 @@ test('Admin can delete his post', function(){
 
     $response->assertRedirectToRoute('posts.index');
 
-    expect(Post::all())->toHaveCount(0);
+    expect(Post::count())->toBe(0);
 });
 
 test('Admin cannot delete NOT his post', function(){

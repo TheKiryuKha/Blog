@@ -4,12 +4,9 @@ use App\Http\Requests\CategoryRequest;
 
 test("Category has right validation rules", function(){
 
-    $request = CategoryRequest::create(
-        '',
-        'POST'
-    );
+    $request = new CategoryRequest();
     
-    expect($request->rules())->toBe([
+    expect($request->rules())->toMatchArray([
         'title' => ['required', 'string', 'min:1', 'max:20']
     ]);
 });

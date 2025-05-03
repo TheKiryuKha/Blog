@@ -14,11 +14,7 @@ class CategoryPolicy
     {
         return $user->role === UserRole::Admin;
     }
-    public function show(User $user, Category $category): bool
-    {
-        return true;
-    }
-
+    
     public function create(User $user): bool
     {
         return $user->role === UserRole::Admin;

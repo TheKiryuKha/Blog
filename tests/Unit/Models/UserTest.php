@@ -4,7 +4,6 @@ use App\Models\Comment;
 use App\Models\User;
 
 test('to array', function(){
-
     $user = User::factory()->create()->fresh();
 
     expect(array_keys($user->toArray()))->toBe([
@@ -20,12 +19,8 @@ test('to array', function(){
 });
 
 test('Has comments', function(){
-
-    $user = User::factory()->create()->fresh();
-    Comment::factory()->count(3)->create([
-        'user_id' => $user->id
-    ]);
+    $user = User::factory()->has(Comment::factory()->count(3))->create();
 
     expect($user->comments)->toHaveCount(3);
-
+    expect($user->comments()->first())->toBeInstanceOf(Comment::class);
 });

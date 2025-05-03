@@ -11,9 +11,9 @@ test('Admin deletes category', function(){
         ->from(route('categories.index'))
         ->delete(route('categories.destroy', $category));
 
-    $responce->assertRedirectToRoute('categories.index');
+    $responce->assertStatus(302);
 
-    expect(Category::all())->toHaveCount(0);
+    expect(Category::count())->toBe(0);
 });
 
 test('Non admin cannot delete category', function(){

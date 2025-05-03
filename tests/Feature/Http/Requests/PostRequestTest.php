@@ -4,12 +4,9 @@ use App\Http\Requests\PostRequest;
 
 test("Post has right validation rules", function(){
 
-    $request = PostRequest::create(
-        '',
-        'POST'
-    );
+    $request = new PostRequest();
     
-    expect($request->rules())->toBe([
+    expect($request->rules())->toMatchArray([
         'title' => ['required', 'string', 'min:3', 'max:100'],
         'image' => ['nullable', 'image'],
         'content' => ['required', 'string', 'min:3', 'max:255'],

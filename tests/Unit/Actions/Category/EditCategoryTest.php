@@ -7,9 +7,7 @@ it('edits category', function(){
     $category = Category::factory()->create();
     $action = app(EditCategory::class);
 
-    $action->handle($category, [
-        'title' => 'Test'
-    ]);
+    $action->handle($category, ['title' => 'Test']);
 
     expect($category)
         ->title->toBe('Test');

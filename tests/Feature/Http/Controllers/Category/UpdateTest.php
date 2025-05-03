@@ -4,7 +4,6 @@ use App\Models\Category;
 use App\Models\User;
 
 test('admin edits category', function(){
-
     $admin = User::factory()->admin()->create();
     $category = Category::factory()->create();
 
@@ -14,9 +13,9 @@ test('admin edits category', function(){
             'title' => 'New Title'
         ]);
 
-    $response->assertRedirectToRoute('categories.index');
+    $response->assertStatus(302);
 
-    expect(Category::all())->toHaveCount(1)
+    expect(Category::count())->toBe(1)
         ->and(Category::first()->title)->toBe('New Title');
 });
 

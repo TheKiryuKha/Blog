@@ -5,7 +5,6 @@ use App\Models\Post;
 use App\Models\User;
 
 test('to array', function(){
-
     $comment = Comment::factory()->create()->fresh();
 
     expect(array_keys($comment->toArray()))->toBe([
@@ -19,24 +18,13 @@ test('to array', function(){
 });
 
 it('Belongs to user', function(){
-
-    $user = User::factory()->create();
-    $comment = Comment::factory()->create([
-        'user_id' => $user->id
-    ]);
+    $comment = Comment::factory()->has(User::factory())->create();
 
     expect($comment->user)->toBeInstanceOf(User::class);
-
 });
 
 it('Belongs to post', function(){
-
-    $post = Post::factory()->create();
-
-    $comment = Comment::factory()->create([
-        'post_id' => $post->id
-    ]);
+    $comment = Comment::factory()->has(Post::factory())->create();
 
     expect($comment->post)->toBeInstanceOf(Post::class);
-
 });

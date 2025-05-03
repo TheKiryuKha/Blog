@@ -5,9 +5,7 @@ use App\Models\User;
 
 test('User can see edit page of his comment', function(){
     $user = User::factory()->create();
-    $comment = Comment::factory()->create([
-        'user_id' => $user->id
-    ]);
+    $comment = Comment::factory()->create(['user_id' => $user->id]);
 
     $this->actingAs($user)
         ->get(route('comments.edit', $comment))

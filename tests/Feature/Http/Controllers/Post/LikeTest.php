@@ -21,12 +21,10 @@ test('User like the post', function(){
 
 test('User dislike the post', function(){
     $user = User::factory()->create();
-    $post = Post::factory()->create();
+    $post = Post::factory()->create(['likes' => 1]);
     $action = app(ViewPost::class);
     $action->handle($user, $post);
 
-    $post->likes++;
-    $post->save();
     DB::table('history')
                 ->where('post_id', $post->id)
                 ->where('user_id', $user->id)

@@ -11,7 +11,7 @@ final class TogglePostStatus{
     public function handle(Post $post): bool
     {
         DB::transaction(function() use($post){
-            if($post->status == PostStatus::Simple->value){
+            if($post->status == PostStatus::Simple){
                 $post->status = PostStatus::Featured;
             } else{
                 $post->status = PostStatus::Simple;

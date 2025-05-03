@@ -5,7 +5,6 @@ use App\Models\User;
 use App\Actions\CreatePost;
 
 it('creates post', function(){
-    
     $user = User::factory()->create();
     $action = app(CreatePost::class);
 

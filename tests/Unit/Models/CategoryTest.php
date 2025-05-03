@@ -1,15 +1,25 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Post;
 
 test('to array', function(){
     
-    $user = Category::factory()->create()->fresh();
+    $category = Category::factory()->create()->fresh();
 
-    expect(array_keys($user->toArray()))->toBe([
+    expect(array_keys($category->toArray()))->toBe([
         'id',
         'title',
         'created_at',
         'updated_at'
     ]);
+});
+
+it('has posts', function(){
+    $category = Category::factory()
+        ->has(Post::factory()->count(3))
+        ->create();
+
+    expect($category->posts)->toHaveCount(3);
+    expect($category->posts()->first())->toBeInstanceOf(Post::class);
 });

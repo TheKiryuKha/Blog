@@ -3,10 +3,8 @@
 use App\Models\Comment;
 use App\Actions\EditComment;
 
-
 it('edits comment', function (){
-
-    $comment = Comment::factory()->create()->fresh();
+    $comment = Comment::factory()->create();
     $action = app(EditComment::class);
 
     $action->handle($comment, [

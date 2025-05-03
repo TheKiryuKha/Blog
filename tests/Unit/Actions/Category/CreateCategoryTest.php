@@ -7,9 +7,7 @@ use App\Models\Category;
 it('creates category', function(){
     $action = app(CreateCategory::class);
 
-    $category = $action->handle([
-        'title' => 'Test'
-    ]);
+    $category = $action->handle(['title' => 'Test']);
 
     expect($category)
         ->toBeInstanceOf(Category::class)
