@@ -1,25 +1,34 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 
 test('Admin creates post', function (){
     $admin = User::factory()->admin()->create();
+    $categories = Category::factory()->count(3)->create();
     
     $response = $this->actingAs($admin)
         ->from(route('posts.index'))
         ->post(route('posts.store'), [
             'title' => 'Test',
-            'content' => 'Test Post'
+            'content' => 'Test Post',
+            'categories' => [
+                $categories[0]->id,
+                $categories[1]->id,
+                $categories[2]->id,
+            ]
         ]);
 
     $response->assertRedirectToRoute('posts.index');
 
-    $posts = Post::all();
+    expect(Post::count())->toBe(1);
 
-    expect($posts)->toHaveCount(1)
-        ->and($posts[0]->title)->toBe('Test')
-        ->and($posts[0]->content)->toBe('Test Post');
+    expect(Post::first())
+        ->title->toBe('Test')
+        ->content->toBe('Test Post');
+
+    expect(Post::first()->categories()->first())->toBeInstanceOf(Category::class);
 });
 
 test('User cannot create post', function (){

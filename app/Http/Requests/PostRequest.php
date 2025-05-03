@@ -16,7 +16,9 @@ class PostRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'min:3', 'max:100'],
             'image' => ['nullable', 'image'],
-            'content' => ['required', 'string', 'min:3', 'max:255']
+            'content' => ['required', 'string', 'min:3', 'max:255'],
+            'categories' => 'array', 
+            'categories.*' => 'exists:categories,id'
         ];
     }
 }

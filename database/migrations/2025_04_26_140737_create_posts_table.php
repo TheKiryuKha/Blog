@@ -40,5 +40,18 @@ return new class extends Migration
 
             $table->boolean('is_liked');
         });
+
+        Schema::create('category_post', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('post_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->foreignId('category_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->timestamps();
+        });
     }
 };
