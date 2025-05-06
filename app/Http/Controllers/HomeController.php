@@ -11,7 +11,7 @@ class HomeController
     {   
         return view('home', [
             'featured_posts' => Post::getFeaturedPosts(),
-            'latest_posts' => Post::getLatestPosts()
+            'latest_posts' => Post::getLatestPosts(8)
         ]);
     }
 }

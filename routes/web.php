@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,4 @@ require __DIR__.'/groups/category.php';
 require __DIR__.'/groups/post.php';
 
 Route::get('/home', HomeController::class)->name('home');
+Route::get('/blog', BlogController::class)->name('blog');

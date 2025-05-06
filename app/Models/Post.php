@@ -58,11 +58,11 @@ class Post extends Model
             ->get();
     }
 
-    public static function getLatestPosts(): Collection
+    public static function getLatestPosts(int $limit): Collection
     {
         return Post::orderBy('created_at')
-            ->with('categories')
-            ->limit(8)
+            ->with('categories', 'user')
+            ->limit($limit)
             ->get();
     }
 
