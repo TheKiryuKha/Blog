@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\PostStatus;
 use DB;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -48,6 +49,21 @@ class Post extends Model
             ->where('post_id', $this->id)
             ->where('user_id', $user->id)
             ->value('is_liked');
+    }
+
+    public static function getFeaturedPosts(): Collection
+    {
+        return Post::where('status', PostStatus::Featured)
+            ->with('categories')
+            ->get();
+    }
+
+    public static function getLatestPosts(): Collection
+    {
+        return Post::orderBy('created_at')
+            ->with('categories')
+            ->limit(8)
+            ->get();
     }
 
     public function saveLikeInHistory($user): void
